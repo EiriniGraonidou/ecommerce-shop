@@ -1,13 +1,26 @@
 package net.graonidou.assignment.shop;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-public class EcommerceShopApplication {
+import net.graonidou.assignment.shop.product.ProductManager;
 
+@SpringBootApplication
+public class EcommerceShopApplication implements CommandLineRunner {
+
+	@Autowired
+	private ProductManager productManager;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(EcommerceShopApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		productManager.loadInitialTestData();
+		
 	}
 
 }

@@ -10,8 +10,8 @@ import lombok.Builder;
 public class ProductStockDto extends RepresentationModel<ProductStockDto> {
 	
 	public String name;
-	public String description;
 	public BigDecimal price;
+	public String currency;
 	public long stock;
 
 }

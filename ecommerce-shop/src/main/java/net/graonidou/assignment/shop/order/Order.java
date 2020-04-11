@@ -1,5 +1,7 @@
 package net.graonidou.assignment.shop.order;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -24,10 +26,10 @@ import lombok.Value;
  *
  */
 @Getter
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id", callSuper = false)
 @Entity
 @Table(name = "orders")
-public class Order  extends AbstractAggregateRoot<Order> {
+public class Order extends AbstractAggregateRoot<Order> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -37,6 +39,18 @@ public class Order  extends AbstractAggregateRoot<Order> {
 	private Set<OrderItem> orderItems;
 	
 	private Status status;
+	
+	
+	public Order() {
+		this.orderItems = new HashSet<>();
+		this.status = Status.CREATED;
+	}
+	
+	public void addItem(OrderItem orderItem) {
+		this.orderItems.add(orderItem);
+		
+		registerEvent(OrderItemAdded.with(LocalDateTime.now(), orderItem));
+	}
 	
 	public void complete() {
 		this.status = Status.COMPLETED;
@@ -50,9 +64,29 @@ public class Order  extends AbstractAggregateRoot<Order> {
 	}
 	
 
+	/**
+	 * Domain event indicating that the order has been completed; here the action
+	 * of the product being bought is expressed implicitly. 
+	 * 
+	 * @author Eirini Graonidou
+	 *
+	 */
 	@Value
 	@RequiredArgsConstructor(staticName = "of", access = AccessLevel.PRIVATE)
 	public static class OrderCompleted {
 		Order order;
+	}
+	
+	/**
+	 * Domain event indicating that an <code>OrderItem</code>has been added to the order.
+	 * 
+	 * @author Eirini Graonidou
+	 *
+	 */
+	@Value
+	@RequiredArgsConstructor(staticName = "with", access = AccessLevel.PRIVATE)
+	public static class OrderItemAdded {
+		LocalDateTime itemAddedAt;
+		OrderItem orderItem;
 	}
 }

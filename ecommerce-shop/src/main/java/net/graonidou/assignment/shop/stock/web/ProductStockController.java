@@ -23,7 +23,8 @@ import net.graonidou.assignment.shop.stock.StockManager;
  * @author Eirini Graonidou
  *
  */
-@RestController(value = "/products")
+@RestController
+@RequestMapping("/product-stocks")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class ProductStockController {
 	
@@ -31,32 +32,28 @@ public class ProductStockController {
 	private final StockManager stockManager;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public @ResponseBody PageDto<ProductStockDto> getAll(
-			@RequestParam(name = "size", required = false) int size,
-			@RequestParam(name = "page", required = false) int page) {
+	public @ResponseBody CollectionModel<ProductStockDto> getAll(
+			@RequestParam(name = "size", required = false, defaultValue = "10") int size,
+			@RequestParam(name = "page", required = false, defaultValue = "0") int page) {
 		
 		CollectionModel<ProductStockDto> content = productStockConverter.toCollectionModel(
 				stockManager.fetchAll(PageRequest.of(page, size)).getContent());
 		
-		return PageDto.<ProductStockDto>builder()
-				.content(content.getContent())
-				.size(size)
-				.number(page)
-				.build();
+		return content;
 	}
 	
-	@RequestMapping(path = "/{productId}", method = RequestMethod.GET)
-	public @ResponseBody ProductStockDto get(@PathVariable("productId") Long productId) {
-		return productStockConverter.toModel(stockManager.fetchById(productId));
+	@RequestMapping(path = "/{productStockId}", method = RequestMethod.GET)
+	public @ResponseBody ProductStockDto get(@PathVariable("productStockId") Long productStockId) {
+		return productStockConverter.toModel(stockManager.fetchById(productStockId));
 	}
 	
-	@RequestMapping(path = "/{productId}", method = RequestMethod.PUT)
-	public @ResponseBody ProductStockDto refill(
-			@PathVariable("productId") Long productId,
-			@RequestBody(required = false) long amountToAdd) {
+	@RequestMapping(path = "/{productStockId}", method = RequestMethod.PATCH)
+	public ProductStockDto refill(
+			@PathVariable("productStockId") Long productStockId,
+			@RequestBody(required = false) RefillRequestDto refillRequest) {
 		
-		ProductStock stock = stockManager.fetchById(productId);
-		return productStockConverter.toModel(stockManager.fetchById(productId));
+		return productStockConverter.toModel(
+				stockManager.refill(productStockId, refillRequest.quantity));
 	}
 	
 	@Builder

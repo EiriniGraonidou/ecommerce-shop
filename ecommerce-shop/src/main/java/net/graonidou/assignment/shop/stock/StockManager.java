@@ -35,10 +35,10 @@ public class StockManager {
 		return productsStock.findById(productStockId).orElseThrow(EntityNotFoundException::new);
 	}
 	
-	public void refill(Long productStockId, Long byAmount) {
+	public ProductStock refill(Long productStockId, Long quantity) {
 		ProductStock productStock = productsStock.findById(productStockId).orElseThrow(EntityNotFoundException::new);
-		productStock.refill(byAmount);
-		productsStock.save(productStock);
+		productStock.refill(quantity);
+		return productsStock.save(productStock);
 	}
 
 	@EventListener
