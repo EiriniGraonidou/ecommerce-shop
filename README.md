@@ -1,7 +1,7 @@
-# ecommerce-shop
+## ecommerce-shop
 REST application for the stock management of the e-commerce-shop
 
-## Conditions and Constraints
+### Conditions and Constraints
 1. Feel free to use any Java-based framework and database
 2. The application shall follow the multi-tier architecture paradigm
 3. All interfaces shall be covered by unit tests
@@ -10,7 +10,7 @@ REST application for the stock management of the e-commerce-shop
 6. The completed application shall be published to a publicly accessible GIT repository
 like BitBucket or Github.
 
-## Functional Requirements
+### Functional Requirements
 1. The product stock has a predefined initial stock of 100 items
 2. It must be possible to request the entire product and product stock information
 3. It must be possible to request the stock of an individual product
