@@ -1,3 +1,6 @@
+/*
+Copyright [2020] [Eirini Graonidou], All rights reserved.
+*/
 package net.graonidou.assignment.shop.commons;
 
 public class ResourceNotFoundException extends BusinessRuntimeException {

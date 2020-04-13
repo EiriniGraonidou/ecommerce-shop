@@ -1,9 +1,11 @@
+/*
+Copyright [2020] [Eirini Graonidou], All rights reserved.
+*/
 package net.graonidou.assignment.shop.stock.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

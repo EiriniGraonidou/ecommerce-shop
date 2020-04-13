@@ -1,3 +1,6 @@
+/*
+Copyright [2020] [Eirini Graonidou], All rights reserved.
+*/
 package net.graonidou.assignment.shop.stock;
 
 import static org.assertj.core.api.Assertions.assertThat;

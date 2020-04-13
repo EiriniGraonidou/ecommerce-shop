@@ -1,3 +1,6 @@
+/*
+Copyright [2020] [Eirini Graonidou], All rights reserved.
+*/
 package net.graonidou.assignment.shop.order;
 
 import java.util.List;
@@ -6,10 +9,9 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import net.graonidou.assignment.shop.commons.ResourceNotFoundException;
-import net.graonidou.assignment.shop.order.Order.Status;
 
 /**
- * Class responsible for the managing of orders.
+ * Class responsible for the management of orders.
  * 
  * @author Eirini Graonidou
  *
@@ -38,7 +40,7 @@ public class OrderManager {
 	 * @throws {@link ResourceNotFoundException} if no order with the given identifier exists.
 	 */
 	public Order fetchById(Long orderId) {
-		return orders.findById(orderId).orElseThrow(() -> new ResourceNotFoundException("the requested resource could not be found"));
+		return orders.findById(orderId).orElseThrow(() -> new ResourceNotFoundException("The requested resource could not be found"));
 	}
 	
 	/**

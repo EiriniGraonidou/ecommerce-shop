@@ -1,3 +1,6 @@
+/*
+Copyright [2020] [Eirini Graonidou], All rights reserved.
+*/
 package net.graonidou.assignment.shop.order;
 
 import java.time.LocalDateTime;
@@ -19,15 +22,18 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.Value;
 import net.graonidou.assignment.shop.commons.BusinessRuntimeException;
 
 /**
+ * Model for an order. Has a <code>Status</code> and holds a set of order items.
  * 
  * @author Eirini Graonidou
  *
  */
 @Getter
+@Setter(value = AccessLevel.PACKAGE)
 @EqualsAndHashCode(of = "id", callSuper = false)
 @Entity
 @Table(name = "orders")
@@ -45,7 +51,7 @@ public class Order extends AbstractAggregateRoot<Order> {
 	
 	Order() {
 		this.orderItems = new HashSet<>();
-		this.status = Status.CREATED;
+		this.status = Status.SUBMITTED;
 	}
 	
 	void addItem(OrderItem orderItem) {
@@ -54,21 +60,34 @@ public class Order extends AbstractAggregateRoot<Order> {
 	}
 	
 	void addItems(List<OrderItem> orderItems) {
+		if (orderItems.isEmpty()) {
+			throw new BusinessRuntimeException("Cannot add items. The input list is empty");
+		}
 		this.orderItems.addAll(orderItems);
 		registerEvent(OrderItemsAdded.with(this.id, LocalDateTime.now(), orderItems));
 	}
 	
+	/**
+	 * Validates and completes the order. 
+	 * This is the last state of that an order can reach.
+	 * 
+	 */
 	void complete() {
 		if (this.status == Status.COMPLETED) {
-			throw new BusinessRuntimeException("Cannot complete.The order is already completed");
+			throw new BusinessRuntimeException("Cannot complete. The order is already completed");
 		}
+		
+		if (this.orderItems.isEmpty()) {
+			throw new BusinessRuntimeException("Cannot complete order. No order items have been added to the order");
+		}
+		
 		this.status = Status.COMPLETED;
 		registerEvent(OrderCompleted.of(this));
 	}
 	
 	
 	public enum Status {
-		CREATED, SUBMITTED, COMPLETED;
+		SUBMITTED, COMPLETED;
 	}
 	
 
@@ -86,7 +105,7 @@ public class Order extends AbstractAggregateRoot<Order> {
 	}
 	
 	/**
-	 * Domain event indicating that an <code>OrderItem</code>has been added to the order.
+	 * Domain event indicating that one or more <code>OrderItem</code>(s) have been added to the order.
 	 * 
 	 * @author Eirini Graonidou
 	 *

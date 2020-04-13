@@ -1,3 +1,6 @@
+/*
+Copyright [2020] [Eirini Graonidou], All rights reserved.
+*/
 package net.graonidou.assignment.shop.stock;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,6 +59,14 @@ class ProductStockShould {
 		.isInstanceOf(OutOfStock.class)
 		.hasMessageContaining("Insufficient stock");
 	}
+	
+	@Test
+	void reduceValidAmount() {
+		long amountToReduce = 10L;
+		this.sut.reduce(amountToReduce);
+		assertThat(this.sut.getStock()).isEqualTo(ProductStock.INITIAL_STOCK_SIZE- amountToReduce);
+	}
+	
 	
 
 }
