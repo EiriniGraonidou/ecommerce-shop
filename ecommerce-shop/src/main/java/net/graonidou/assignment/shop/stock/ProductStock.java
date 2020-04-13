@@ -30,7 +30,7 @@ import net.graonidou.assignment.shop.product.Product;
 @Table(name = "product_stock")
 public class ProductStock {
 	
-	private final static long INITIAL_STOCK_SIZE = 100L;
+	final static long INITIAL_STOCK_SIZE = 100L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)

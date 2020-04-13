@@ -20,7 +20,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Component
 public class ProductStockConverter extends RepresentationModelAssemblerSupport<ProductStock, ProductStockDto> {
 
-	public ProductStockConverter() {
+	ProductStockConverter() {
 		super(ProductStockController.class, ProductStockDto.class);
 	}
 
@@ -28,9 +28,8 @@ public class ProductStockConverter extends RepresentationModelAssemblerSupport<P
 	public ProductStockDto toModel(ProductStock productStock) {
 		Product product = productStock.getProduct();
 		ProductStockDto productStockDto = ProductStockDto.builder()
+				.id(productStock.getId())
 				.name(product.getName())
-				.price(product.getPrice().getAmount())
-				.currency(product.getPrice().getCurrency().getCode())
 				.stock(productStock.getStock())
 				.build();
 		

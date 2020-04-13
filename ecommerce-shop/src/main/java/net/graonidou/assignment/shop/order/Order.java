@@ -2,6 +2,7 @@ package net.graonidou.assignment.shop.order;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -41,25 +42,28 @@ public class Order extends AbstractAggregateRoot<Order> {
 	private Status status;
 	
 	
-	public Order() {
+	Order() {
 		this.orderItems = new HashSet<>();
 		this.status = Status.CREATED;
 	}
 	
-	public void addItem(OrderItem orderItem) {
+	void addItem(OrderItem orderItem) {
 		this.orderItems.add(orderItem);
-		
-		registerEvent(OrderItemAdded.with(LocalDateTime.now(), orderItem));
+		registerEvent(OrderItemsAdded.with(this.id, LocalDateTime.now(), List.of(orderItem)));
+	}
+	
+	void addItems(List<OrderItem> orderItems) {
+		this.orderItems.addAll(orderItems);
+		registerEvent(OrderItemsAdded.with(this.id, LocalDateTime.now(), orderItems));
 	}
 	
 	public void complete() {
 		this.status = Status.COMPLETED;
-		
 		registerEvent(OrderCompleted.of(this));
 	}
 	
 	
-	enum Status {
+	public enum Status {
 		CREATED, SUBMITTED, COMPLETED;
 	}
 	
@@ -85,8 +89,9 @@ public class Order extends AbstractAggregateRoot<Order> {
 	 */
 	@Value
 	@RequiredArgsConstructor(staticName = "with", access = AccessLevel.PRIVATE)
-	public static class OrderItemAdded {
+	public static class OrderItemsAdded {
+		Long orderId;
 		LocalDateTime itemAddedAt;
-		OrderItem orderItem;
+		List<OrderItem> orderItems;
 	}
 }

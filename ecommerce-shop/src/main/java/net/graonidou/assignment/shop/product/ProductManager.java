@@ -3,9 +3,12 @@ package net.graonidou.assignment.shop.product;
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
+import net.graonidou.assignement.shop.commons.ResourceNotFoundException;
 import net.graonidou.assignment.shop.product.Price.Currency;
 
 /**
@@ -35,6 +38,28 @@ public class ProductManager {
 			.price(price)
 			.build();
 		return catalogue.save(product);
+	}
+	
+	/**
+	 * Retrieves the <code>Product</code> with the given identifier.
+	 * 
+	 * @param productId the identifier of the <code>Product</code>
+	 * @return the <code>Product</code> with the given identifier.
+	 */
+	public Product findById(Long productId) {
+		return this.catalogue.findById(productId)
+				.orElseThrow(() -> new ResourceNotFoundException("The product with id: " + productId + " could not be found"));
+	}
+	
+	/**
+	 * Finds all <code>Products</code> in a paginated manner.
+	 * 
+	 * @param page the page to retrieve products
+	 * 
+	 * @return the product information for the given or a default page
+	 */
+	public Page<Product> findAll(Pageable page) {
+		return catalogue.findAll(page);
 	}
 	
 	public void loadInitialTestData() {
