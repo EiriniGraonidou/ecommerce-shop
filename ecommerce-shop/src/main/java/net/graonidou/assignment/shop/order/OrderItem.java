@@ -1,8 +1,8 @@
 package net.graonidou.assignment.shop.order;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,8 +26,7 @@ import net.graonidou.assignment.shop.product.Product;
 public class OrderItem {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
+	private UUID id;
 	
 	@OneToOne
 	private Product product;
@@ -35,6 +34,7 @@ public class OrderItem {
 	private long amount;
 
 	public OrderItem(Product product, long amount) {
+		this.id = UUID.randomUUID();
 		this.product = product;
 		this.amount = amount;
 	}

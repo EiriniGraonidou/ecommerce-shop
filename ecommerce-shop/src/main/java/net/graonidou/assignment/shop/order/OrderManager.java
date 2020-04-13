@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import net.graonidou.assignement.shop.commons.ResourceNotFoundException;
+import net.graonidou.assignment.shop.commons.ResourceNotFoundException;
+import net.graonidou.assignment.shop.order.Order.Status;
 
 /**
  * Class responsible for the managing of orders.
@@ -50,6 +51,18 @@ public class OrderManager {
 	public Order addItems(Long orderId, List<OrderItem> orderItems) {
 		Order order = fetchById(orderId);
 		order.addItems(orderItems);
+		return orders.save(order);
+	}
+	
+	/**
+	 * Completes the order. This is the last state that an <code>Order</code> can reach.
+	 * @param orderId the identifier of the order.
+	 * 
+	 * @return the updated, completed order.
+	 */
+	public Order complete(Long orderId) {
+		Order order = fetchById(orderId);
+		order.complete();
 		return orders.save(order);
 	}
 	

@@ -1,4 +1,4 @@
-package net.graonidou.assignement.shop.commons;
+package net.graonidou.assignment.shop.commons;
 
 public class ResourceNotFoundException extends BusinessRuntimeException {
 

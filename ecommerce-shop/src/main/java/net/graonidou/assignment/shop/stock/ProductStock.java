@@ -11,7 +11,7 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import net.graonidou.assignement.shop.commons.BusinessRuntimeException;
+import net.graonidou.assignment.shop.commons.BusinessRuntimeException;
 import net.graonidou.assignment.shop.product.Product;
 
 /**

@@ -40,8 +40,8 @@ public class OrderController {
 	@RequestMapping(path = "{orderId}/items", method = RequestMethod.PUT)
 	public @ResponseBody OrderDto postOrderItem(@PathVariable("orderId") Long orderId,
 			@RequestBody List<OrderItemForCreation> orderItem) {
-		Order order = orderManager.addItems(orderId, this.orderConverter.convert(orderItem));
-		return orderConverter.toModel(order);
+		Order order = this.orderManager.addItems(orderId, this.orderConverter.convert(orderItem));
+		return this.orderConverter.toModel(order);
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class OrderController {
 	 */
 	@RequestMapping(path = "{orderId}", method = RequestMethod.PATCH)
 	public @ResponseBody OrderDto complete(@PathVariable("orderId") Long orderId) {
-		return null;
+		return this.orderConverter.toModel(this.orderManager.complete(orderId));
 
 	}
 

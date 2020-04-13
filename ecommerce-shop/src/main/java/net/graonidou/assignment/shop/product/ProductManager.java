@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
-import net.graonidou.assignement.shop.commons.ResourceNotFoundException;
+import net.graonidou.assignment.shop.commons.ResourceNotFoundException;
 import net.graonidou.assignment.shop.product.Price.Currency;
 
 /**

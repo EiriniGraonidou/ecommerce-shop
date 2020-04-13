@@ -1,4 +1,4 @@
-package net.graonidou.assignement.shop.commons;
+package net.graonidou.assignment.shop.commons;
 
 /**
  * Convenient hierarchy definition for exceptions occurring due to not respecting the business rules. 

@@ -1,6 +1,7 @@
 package net.graonidou.assignment.shop.stock;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class Reservation {
 	private LocalDateTime createdAt;
 	private LocalDateTime expiresAt;
 	
-	private Long orderItemId;
+	private UUID orderItemId;
 	
 	@OneToOne
 	private Product product;
@@ -40,7 +41,7 @@ public class Reservation {
 	
 	@Builder
 	public Reservation(
-			Long orderItemId,
+			UUID orderItemId,
 			LocalDateTime createdAt, 
 			Product product, 
 			long amount, 

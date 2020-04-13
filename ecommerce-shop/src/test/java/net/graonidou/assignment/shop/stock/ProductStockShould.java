@@ -9,7 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import net.graonidou.assignement.shop.commons.BusinessRuntimeException;
+import net.graonidou.assignment.shop.commons.BusinessRuntimeException;
 import net.graonidou.assignment.shop.product.Product;
 
 @ExtendWith(MockitoExtension.class)

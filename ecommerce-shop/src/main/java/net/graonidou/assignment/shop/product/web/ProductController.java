@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import net.graonidou.assignement.shop.commons.PageDto;
+import net.graonidou.assignment.shop.commons.PageDto;
 import net.graonidou.assignment.shop.product.Product;
 import net.graonidou.assignment.shop.product.ProductManager;
 

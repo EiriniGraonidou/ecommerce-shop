@@ -17,7 +17,7 @@ import net.graonidou.assignment.shop.order.Order.Status;
 import net.graonidou.assignment.shop.order.OrderItem;
 import net.graonidou.assignment.shop.product.Product;
 import net.graonidou.assignment.shop.product.ProductManager;
-import net.graonidou.assignment.shop.stock.web.ProductStockController;
+import net.graonidou.assignment.shop.product.web.ProductController;
 
 /**
  * Converter between the model and the representation of an <code>Order</code>.
@@ -76,7 +76,7 @@ public class OrderConverter extends RepresentationModelAssemblerSupport<Order, O
 			 dto.itemPrice = item.getProduct().getPrice().getAmount();
 			 dto.currency = item.getProduct().getPrice().getCurrency().getCode();
 			 dto.amount = item.getAmount();
-			 dto.add(linkTo(methodOn(ProductStockController.class).get(item.getProduct().getId())).withRel("productDetails"));
+			 dto.add(linkTo(methodOn(ProductController.class).get(item.getProduct().getId())).withRel("productDetails"));
 			 orderItemsDto.add(dto);
 		 });
 		return orderItemsDto;

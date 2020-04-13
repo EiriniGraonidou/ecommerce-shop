@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import net.graonidou.assignement.shop.commons.PageDto;
+import net.graonidou.assignment.shop.commons.PageDto;
 import net.graonidou.assignment.shop.stock.ProductStock;
 import net.graonidou.assignment.shop.stock.StockManager;
 

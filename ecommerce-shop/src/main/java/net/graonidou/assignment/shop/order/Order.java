@@ -20,6 +20,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
+import net.graonidou.assignment.shop.commons.BusinessRuntimeException;
 
 /**
  * 
@@ -57,7 +58,10 @@ public class Order extends AbstractAggregateRoot<Order> {
 		registerEvent(OrderItemsAdded.with(this.id, LocalDateTime.now(), orderItems));
 	}
 	
-	public void complete() {
+	void complete() {
+		if (this.status == Status.COMPLETED) {
+			throw new BusinessRuntimeException("Cannot complete.The order is already completed");
+		}
 		this.status = Status.COMPLETED;
 		registerEvent(OrderCompleted.of(this));
 	}

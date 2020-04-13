@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,7 +32,7 @@ public class ReservationShould {
 		this.sut = Reservation.builder()
 				.amount(10L)
 				.createdAt(LocalDateTime.now())
-				.orderItemId(1L)
+				.orderItemId(UUID.randomUUID())
 				.product(mock(Product.class))
 				.build();
 		

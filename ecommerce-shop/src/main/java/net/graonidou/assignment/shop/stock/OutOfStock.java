@@ -1,6 +1,6 @@
 package net.graonidou.assignment.shop.stock;
 
-import net.graonidou.assignement.shop.commons.BusinessRuntimeException;
+import net.graonidou.assignment.shop.commons.BusinessRuntimeException;
 import net.graonidou.assignment.shop.product.Product;
 
 /**

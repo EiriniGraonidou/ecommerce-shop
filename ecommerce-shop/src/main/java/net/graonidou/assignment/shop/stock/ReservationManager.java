@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.graonidou.assignement.shop.commons.ResourceNotFoundException;
+import net.graonidou.assignment.shop.commons.ResourceNotFoundException;
 import net.graonidou.assignment.shop.order.Order.OrderCompleted;
 import net.graonidou.assignment.shop.order.Order.OrderItemsAdded;
 import net.graonidou.assignment.shop.product.Product;
