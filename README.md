@@ -42,7 +42,7 @@ The implementation of several concepts such as the following could be improved:
 
 ### Hints
 To start the e-shop one can:
-mvn install
-and then java -jar ecommerce-shop-0.0.1-SNAPSHOT.jar otherwise just run as spring boot app.
-An overview of the REST-API can be found here {host}:{port}/e-shop/swagger-ui.html#/ after the application is started.
+<pre>mvn install</pre>
+and then <pre>java -jar ecommerce-shop-0.0.1-SNAPSHOT.jar</pre> otherwise just run as spring boot app.
+An overview of the REST-API can be found here: <pre>{host}:{port}/e-shop/swagger-ui.html#/</pre> after the application is started.
 
