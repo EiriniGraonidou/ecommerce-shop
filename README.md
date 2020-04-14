@@ -44,5 +44,7 @@ The implementation of several concepts such as the following could be improved:
 To start the e-shop one can:
 <pre>mvn install</pre>
 and then <pre>java -jar ecommerce-shop-0.0.1-SNAPSHOT.jar</pre> otherwise just run as spring boot app.
-An overview of the REST-API can be found here: <pre>{host}:{port}/e-shop/swagger-ui.html#/</pre> after the application is started.
+An overview of the REST-API can be found here: <pre>/e-shop/swagger-ui.html#/</pre> after the application is started.
+A console for the database can be found here:
+<pre>/e-shop/h2-console</pre> after the application is started.
 
