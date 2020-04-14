@@ -65,9 +65,10 @@ public class OrderConverter extends RepresentationModelAssemblerSupport<Order, O
 		}
 		orderDto.add(linkTo(methodOn(OrderController.class).postOrderItem(orderDto.id, Collections.emptyList()))
 				.withRel("addItems")
-				.withType("POST"));
+				.withType("PUT"));
 		orderDto.add(linkTo(methodOn(OrderController.class).complete(orderDto.id))
-				.withRel("complete").withType("PATCH"));
+				.withRel("complete")
+				.withType("PATCH"));
 	}
 
 	private List<OrderItemDto> toOrderItemsDto(Set<OrderItem> orderItems) {

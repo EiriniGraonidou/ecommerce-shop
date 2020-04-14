@@ -11,6 +11,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import net.graonidou.assignment.shop.product.ProductManager;
 
+/**
+ * 
+ * @author Eirini Graonidou
+ *
+ */
 @SpringBootApplication
 @EnableScheduling
 public class EcommerceShopApplication implements CommandLineRunner {

@@ -6,6 +6,8 @@ package net.graonidou.assignment.shop.product;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,6 +37,8 @@ public class Price {
 	private Long id;
 	
 	private BigDecimal amount;
+	
+	@Enumerated(EnumType.STRING)
 	private Currency currency;
 	
 	public static Price of(BigDecimal amount, Currency currency) {

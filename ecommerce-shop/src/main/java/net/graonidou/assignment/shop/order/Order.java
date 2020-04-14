@@ -10,6 +10,8 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +23,7 @@ import org.springframework.data.domain.AbstractAggregateRoot;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.Value;
@@ -46,6 +49,7 @@ public class Order extends AbstractAggregateRoot<Order> {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<OrderItem> orderItems;
 	
+	@Enumerated(EnumType.STRING)
 	private Status status;
 	
 	
@@ -54,12 +58,12 @@ public class Order extends AbstractAggregateRoot<Order> {
 		this.status = Status.SUBMITTED;
 	}
 	
-	void addItem(OrderItem orderItem) {
+	void addItem(@NonNull OrderItem orderItem) {
 		this.orderItems.add(orderItem);
 		registerEvent(OrderItemsAdded.with(this.id, LocalDateTime.now(), List.of(orderItem)));
 	}
 	
-	void addItems(List<OrderItem> orderItems) {
+	void addItems(@NonNull List<OrderItem> orderItems) {
 		if (orderItems.isEmpty()) {
 			throw new BusinessRuntimeException("Cannot add items. The input list is empty");
 		}
